@@ -1,0 +1,10 @@
+{
+    "AzureOpenAI": {
+      "DeploymentName": "your-deployment-name",
+      "Endpoint": "your-azure-openai-endpoint",
+      "ApiKey": "your-azure-openai-api-key"
+    },
+    "ApplicationInsights": {
+      "ConnectionString": "your-application-insights-connection-string"
+    }
+  }
