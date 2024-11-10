@@ -1,5 +1,4 @@
-﻿using Azure.Monitor.OpenTelemetry.Exporter;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
@@ -9,7 +8,7 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace SemanticKernelAppInsightsTelemetry
+namespace TelemetryAspireDashboardQuickstart
 {
     class Program
     {
@@ -20,11 +19,13 @@ namespace SemanticKernelAppInsightsTelemetry
             .AddJsonFile("hostsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
-            var connectionString = configuration["ApplicationInsights:ConnectionString"]!;
+            // Telemetry setup code goes here
+            // Endpoint to the Aspire Dashboard
+            var endpoint = "http://localhost:4317";
 
             var resourceBuilder = ResourceBuilder
                 .CreateDefault()
-                .AddService("SemanticKernelApplicationInsightsTelemetry");
+                .AddService("SemanticKernelAspireTelemetry");
 
             // Enable model diagnostics with sensitive data.
             AppContext.SetSwitch("Microsoft.SemanticKernel.Experimental.GenAI.EnableOTelDiagnosticsSensitive", true);
@@ -32,13 +33,13 @@ namespace SemanticKernelAppInsightsTelemetry
             using var traceProvider = Sdk.CreateTracerProviderBuilder()
                 .SetResourceBuilder(resourceBuilder)
                 .AddSource("Microsoft.SemanticKernel*")
-                .AddAzureMonitorTraceExporter(options => options.ConnectionString = connectionString)
+                .AddOtlpExporter(options => options.Endpoint = new Uri(endpoint))
                 .Build();
 
             using var meterProvider = Sdk.CreateMeterProviderBuilder()
                 .SetResourceBuilder(resourceBuilder)
                 .AddMeter("Microsoft.SemanticKernel*")
-                .AddAzureMonitorMetricExporter(options => options.ConnectionString = connectionString)
+                .AddOtlpExporter(options => options.Endpoint = new Uri(endpoint))
                 .Build();
 
             using var loggerFactory = LoggerFactory.Create(builder =>
@@ -47,7 +48,7 @@ namespace SemanticKernelAppInsightsTelemetry
                 builder.AddOpenTelemetry(options =>
                 {
                     options.SetResourceBuilder(resourceBuilder);
-                    options.AddAzureMonitorLogExporter(options => options.ConnectionString = connectionString);
+                    options.AddOtlpExporter(options => options.Endpoint = new Uri(endpoint));
                     // Format log messages. This is default to false.
                     options.IncludeFormattedMessage = true;
                     options.IncludeScopes = true;
@@ -68,7 +69,7 @@ namespace SemanticKernelAppInsightsTelemetry
             Kernel kernel = builder.Build();
 
             var answer = await kernel.InvokePromptAsync(
-                "Tell me a joke"
+                "Why is the sky blue in one sentence?"
             );
 
             Console.WriteLine(answer);

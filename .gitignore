@@ -397,3 +397,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 demos/SemanticKernelAppInsightsTelemetry/hostsettings.json
+demos/SemanticKernelAspireTelemetry/hostsettings.json

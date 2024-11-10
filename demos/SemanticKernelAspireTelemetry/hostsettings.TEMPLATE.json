@@ -1,0 +1,7 @@
+{
+    "AzureOpenAI": {
+      "DeploymentName": "your-deployment-name",
+      "Endpoint": "your-azure-openai-endpoint",
+      "ApiKey": "your-azure-openai-api-key"
+    }
+  }
