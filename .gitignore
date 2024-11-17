@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 demos/SemanticKernelAppInsightsTelemetry/hostsettings.json
 demos/SemanticKernelAspireTelemetry/hostsettings.json
+demos/MicronaireEvaluation/appsettings.json
