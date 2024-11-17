@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AanalysisMode>All</AanalysisMode>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- <ProjectReference Include="../../external/semantic-kernel/dotnet/src/SemanticKernel.Core/SemanticKernel.Core.csproj" />
+		<ProjectReference Include="../../external/semantic-kernel/dotnet/src/SemanticKernel.Abstractions/SemanticKernel.Abstractions.csproj" />
+		<ProjectReference Include="../../external/semantic-kernel/dotnet/src/Connectors/Connectors.AzureOpenAI/Connectors.AzureOpenAI.csproj" />
+		<ProjectReference Include="../../external/semantic-kernel/dotnet/samples/Concepts/Concepts.csproj" /> -->
+		<PackageReference Include="Concepts" Version="1.1.0.2" />
+		<!-- <PackageReference Include="Microsoft.Extensions.VectorData.Abstractions" Version="9.0.0-preview.1.24523.1" /> -->
+		<PackageReference Include="Microsoft.SemanticKernel" Version="1.21.1" />
+		<PackageReference Include="Microsoft.SemanticKernel.Abstractions" Version="1.21.1" />
+		<PackageReference Include="Microsoft.SemanticKernel.Connectors.AzureAISearch" Version="1.21.1-alpha" />
+	 	<PackageReference Include="Microsoft.SemanticKernel.Connectors.AzureOpenAI" Version="1.21.1" />
+		<!-- <PackageReference Include="Newtonsoft.Json" Version="13.0.1" /> -->
+		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
+		<ProjectReference Include="../Micronaire/Micronaire.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="data/GroundTruthAnswers.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="data/GroundTruthAnswersMinimal.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="data/Romeo and Juliet.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+
+</Project>

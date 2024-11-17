@@ -399,3 +399,4 @@ FodyWeavers.xsd
 demos/SemanticKernelAppInsightsTelemetry/hostsettings.json
 demos/SemanticKernelAspireTelemetry/hostsettings.json
 demos/MicronaireEvaluation/appsettings.json
+demos/micronaire/src/Demo/appsettings.json
