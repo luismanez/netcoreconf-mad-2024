@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 using System.ComponentModel;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.VectorData;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Data;
 using Microsoft.SemanticKernel.Embeddings;
 
 namespace Demo;
@@ -32,15 +32,14 @@ public class Search
     [Description("Search for a document similar to the given query")]
     public async Task<string> SearchAsync(string query)
     {
-        var vectorSearch = _collection as Microsoft.Extensions.VectorData.IVectorizedSearch<Paragraph>;
+        var vectorSearch = _collection as IVectorizedSearch<Paragraph>;
         var searchVector = await _embeddingGenerationService.GenerateEmbeddingAsync(query);
-        var searchResult =
-            await vectorSearch!.VectorizedSearchAsync(
-                searchVector, new() { Top = 1 }
-            ).Result.Results.ToListAsync();
+        var searchResult = await vectorSearch!.VectorizedSearchAsync(searchVector, new() { Top = 1 });
+        var results = searchResult.Results;
+        var resultsAsList = await results.ToListAsync();
 
         _logger.LogInformation("Got search result:\n{searchResult}", searchResult);
-        return searchResult.FirstOrDefault()!.Record.Text;
+        return resultsAsList.FirstOrDefault()!.Record.Text;
     }
 }
 

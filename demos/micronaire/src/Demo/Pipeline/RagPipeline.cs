@@ -2,11 +2,11 @@
 // Licensed under the MIT License.
 using Micronaire;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.VectorData;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
-using Microsoft.SemanticKernel.Data;
 using Microsoft.SemanticKernel.Embeddings;
 using Microsoft.SemanticKernel.Text;
 
@@ -15,7 +15,6 @@ namespace Demo;
 #pragma warning disable SKEXP0001
 public class RagPipeline : IRagPipeline
 {
-    private readonly IVectorStore _vectorStore;
     private readonly ITextEmbeddingGenerationService _embeddingGenerationService;
     private readonly IChatCompletionService _chatCompletionService;
     private ChatHistory _history;
@@ -32,7 +31,6 @@ public class RagPipeline : IRagPipeline
         ILogger<RagPipeline> logger
     )
     {
-        _vectorStore = vectorStore;
         _embeddingGenerationService = embeddingGenerationService;
         _chatCompletionService = chatCompletionService;
         _history = new();

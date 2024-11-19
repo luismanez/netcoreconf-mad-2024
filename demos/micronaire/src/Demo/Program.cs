@@ -19,12 +19,10 @@ try
     var host = builder.Build();
 
     var pipeline = host.Services.GetRequiredService<IRagPipeline>();
-    var filePath = "data/Romeo and Juliet.txt";
+    //var filePath = "data/Romeo and Juliet.txt";
+    //await pipeline.LoadAsync(filePath);
 
     // var searchString = "Why does Friar Lawrence decide to marry Romeo and Juliet?";
-
-    await pipeline.LoadAsync(filePath);
-
     //var (response, context) = await pipeline.Generate(searchString);
     //Console.WriteLine(response);
 
