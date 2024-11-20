@@ -28,7 +28,7 @@ try
 
     // TODO: Call evaluator passing in the RAG pipeline to generate metrics for the json file
     var ragEvaluator = host.Services.GetRequiredService<IEvaluator>();
-    await ragEvaluator.EvaluateAsync(pipeline, "data/GroundTruthAnswers.json");
+    await ragEvaluator.EvaluateAsync(pipeline, "data/GroundTruthAnswersMinimal.json");
 
     // TODO:  evaluator should provide method to load ground truth answers and query from file path as json file
     // then evaluator would run through each query and ground truth answer, run RAG pipeline and compare response with ground truth
